@@ -49,7 +49,6 @@ val_dataset = tf.keras.preprocessing.image_dataset_from_directory(
     verbose=True
 )
 
-# --- 3. Simple CNN Model (Regression) ---
 def dense_layer(x, growth_rate):
     # BatchNorm -> ReLU -> 1x1 conv -> BatchNorm -> ReLU -> 3x3 conv
     y = layers.BatchNormalization()(x)
