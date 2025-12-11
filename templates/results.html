@@ -1,0 +1,43 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .result { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .result h2 { color: #007bff; }
+        .country { font-size: 1.5em; color: #28a745; }
+        .city { font-size: 1.2em; color: #6c757d; }
+        .top-predictions { margin-top: 20px; }
+        .prediction-item { padding: 5px 0; border-bottom: 1px solid #dee2e6; }
+        .prediction-item:last-child { border-bottom: none; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Classification Results</h1>
+    <div class="result">
+        <h2>📍 Location Identified</h2>
+        <p class="country"><strong>Country:</strong> {{ country }} ({{ "%.1f"|format(country_conf) }}%)</p>
+        {% if city %}
+            <p class="city"><strong>City:</strong> {{ city }} ({{ "%.1f"|format(city_conf) }}%)</p>
+        {% endif %}
+        
+        <div class="top-predictions">
+            <h3>Top 3 Country Predictions:</h3>
+            {% for pred_country, pred_conf in top_countries %}
+                <div class="prediction-item">
+                    {{ pred_country }} ({{ "%.1f"|format(pred_conf) }}%)
+                </div>
+            {% endfor %}
+        </div>
+        
+        <p><small>File: {{ filename }}</small></p>
+    </div>
+    <a href="{{ url_for('index') }}">← Classify Another Image</a>
+</body>
+</html>
